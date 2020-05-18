@@ -1,0 +1,16 @@
+sudo: required
+services: 
+    -docker
+
+before_install:
+    - docker build -t ntambellini/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true USERNAME/react-test npm test
+
+after_success:
+    - docker build -t ntambellini/multi-client ./client
+    - docker build -t ntambellini/multi-nginix ./nginix
+    - docker build -t ntambellini/multi-server ./server
+    - docker build -t ntambellini/multi-worker ./worker
+
