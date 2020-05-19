@@ -10,7 +10,7 @@ script:
 
 after_success:
     - docker build -t ntambellini/multi-client ./client
-    - docker build -t ntambellini/multi-nginix ./nginix
+    - docker build -t ntambellini/multi-nginx ./nginx
     - docker build -t ntambellini/multi-server ./server
     - docker build -t ntambellini/multi-worker ./worker
 
@@ -18,6 +18,6 @@ after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 # Push the images to docker hub
     - docker push ntambellini/multi-client
-    - docker push ntambellini/multi-nginix
+    - docker push ntambellini/multi-nginx
     - docker push ntambellini/multi-server
     - docker push ntambellini/multi-worker
